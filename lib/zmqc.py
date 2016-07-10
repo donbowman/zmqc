@@ -299,7 +299,7 @@ def main():
         if (sock.socket_type == zmq.SUB and
             not any(opt_code == zmq.SUBSCRIBE
                     for (opt_code, _) in sock_opts)):
-            sock.setsockopt(zmq.SUBSCRIBE, '')
+            sock.setsockopt_string(zmq.SUBSCRIBE, '')
 
     # Bind or connect to the provided addresses.
     for address in args.addresses:

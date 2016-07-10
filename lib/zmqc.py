@@ -184,14 +184,14 @@ def read_until_delimiter(stream, delimiter):
         EOFError
     """
 
-    output = array.array('c')
+    output = ""
     c = stream.read(1)
     while c and c != delimiter:
-        output.append(c)
+        output += str(c)
         c = stream.read(1)
     if not (c or output):
         raise EOFError
-    return output.tostring()
+    return str.encode(output)
 
 
 def get_sockopts(sock_opts):
@@ -365,7 +365,7 @@ def read(sock, delimiter, output):
 
     try:
         message = sock.recv()
-        output.write(message + delimiter)
+        output.write(bytes.decode(message) + delimiter)
         output.flush()
     except KeyboardInterrupt:
         raise StopIteration
